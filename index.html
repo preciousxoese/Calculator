@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+<style>
+    .calculator{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #111e11;
+    height: 20rem;
+    width: 15rem;
+
+}
+
+.calculator .bar{
+    display: flex;
+    justify-content: center;
+
+}
+
+.calculator .bar input{
+    width: 13rem;
+    position: relative;
+    margin: 0.5rem 1rem 0.5rem 1rem;
+    height: 2.5em;
+    border-radius: 1rem 0 1rem 1rem ;
+}
+
+.calculator .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.calculator .buttons input{
+    width: 3rem;
+    height:3rem;
+    background: #da8009;
+    color: white;
+    margin: .05rem;
+    border-radius: 50%;
+    border-color: #da8009;
+}
+.calculator .buttons input:hover{
+    color: #111e11;
+    background: #fff;
+}
+
+.calculator .buttons #equal{
+    background: #fff;
+    color: #0e180c;
+}
+
+.calculator .buttons #equal:hover{
+    background: #ccc;
+    color: #111;
+}
+</style>
+
+
+
+</head>
+<body>
+    <div class="calculator">
+        <div class="bar">
+            <input type="textarea" id="result" readonly>
+        </div>
+        <div class="buttons">
+            <input type="button" value="C" onclick="clearNumber('C')">
+            <input type="button" value="*" onclick="getOperator('*')">
+            <input type="button" value="%" onclick="getOperator('%')">
+            <input type="button" value="AC" onclick="deleteResult('AC')">
+
+        </div>
+        <div class="buttons">
+            <input type="button" value="1" onclick="getNumber('1')">
+            <input type="button" value="2" onclick="getNumber('2')">
+            <input type="button" value="3" onclick="getNumber('1')">
+            <input type="button" value="+" onclick="getOperator('+')">
+        </div>
+        <div class="buttons">
+            <input type="button" value="4" onclick="getNumber('4')">
+            <input type="button" value="5" onclick="getNumber('5')">
+            <input type="button" value="6" onclick="getNumber('6')">
+            <input type="button" value="-" onclick="getOperator('-')">
+        </div>
+        <div class="buttons">
+            <input type="button" value="7" onclick="getNumber('7')">
+            <input type="button" value="8" onclick="getNumber('8')">
+            <input type="button" value="9" onclick="getNumber('9')">
+            <input type="button" value="/" onclick="getOperator('/')">
+        </div>
+        <div class="buttons">
+            <input type="button" value="." onclick="getFullstop('.')">
+            <input type="button" value="0" onclick="getNumber('0')">
+            <input type="button" value="00" onclick="getNumber('00')">
+            <input id="equal" type="button" value="=" onclick="calculate('=')">
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+        function getNumber(number){
+            document.getElementById('result').value += number;
+        }
+        function clearResult(){
+            document.getElementById('result').value = '';
+        }
+        function clearNumber(){
+            var result = document.getElementById('result').value;
+            if(result.length > 0){
+                result = result.slice(0, -1);
+                document.getElementById('result').value = result;
+            }
+        }
+
+
+        function deleteResult(){
+            document.getElementById('result').value = '';
+        }
+
+        function getOperator(operator){
+            var result = document.getElementById('result').value;
+            var lastChar = result[result.length -1]
+            if (lastChar !== '+' && lastChar !=='-' && lastChar !== '*' && lastChar !== '/' && lastChar !== '.'){
+                document.getElementById('result').value += operator;
+            }
+        }
+        function calculate(){
+            var result =document.getElementById('result').value;
+            var lastChar = result[result.length -1];
+            if (lastChar !== '+' && lastChar !=='-' && lastChar !== '*' && lastChar !== '/' && lastChar !== '.'){
+                document.getElementById('result').value = eval(result);
+            }
+        }
+        function getFullstop(dot){
+            var result =document.getElementById('result').value;
+            var lastChar = result[result.length -1];
+            if (dot !== '.' || (dot === '.' && !result.includes('.'))) {
+                document.getElementById('result').value += dot;
+            }
+        }
+
+    </script>
+</body>
+</html>
